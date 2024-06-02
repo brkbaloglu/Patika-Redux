@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch }from "react-redux"
 import { addTodo } from '../redux/todos/todosSlice'
-import { nanoid } from '@reduxjs/toolkit'
 
 function Form() {
 
@@ -9,9 +8,12 @@ function Form() {
   const dispatch = useDispatch()
 
   const handleSubmit = (event) => {
+    if (!title) {
+      return
+    }
     event.preventDefault()
 
-    dispatch(addTodo({id: nanoid(), title, completed: false}))
+    dispatch(addTodo({title}))
     setTitle("")
   }
 
